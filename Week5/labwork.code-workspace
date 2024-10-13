@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../05_Queue"
+		},
+		{
+			"path": "../../03_Linkedlist"
+		}
+	],
+	"settings": {}
+}

@@ -16,7 +16,7 @@ bool isArmstrong(int number) {
     }
 
     // Calculate the sum of the powers of its digits
-    temp =number;
+    temp = number;
     while (temp) {        
         int digit = temp % 10;
         sum += pow(digit, numberOfDigits);
