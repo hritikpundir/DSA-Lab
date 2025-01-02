@@ -54,8 +54,11 @@ void evaluateExpression(string exp){
 }  
 
 int main(){
-    string exp = "231*+9-";
+    string exp ;
+    cout<<"Enter the expression: ";
+    cin>>exp;
 
     evaluateExpression(exp);
     return 0;
 }
+//231*+9-

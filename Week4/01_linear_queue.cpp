@@ -1,12 +1,14 @@
- #include<iostream>
+#include <iostream>
 using namespace std;
 
-class Node{
-    public:
+class Node
+{
+public:
     int data;
     Node *next;
 
-    Node(int data){
+    Node(int data)
+    {
         this->data = data;
         this->next = NULL;
     }
@@ -15,51 +17,71 @@ class Node{
 Node *front = 0;
 Node *rear = 0;
 
-void enqueue(int x){
-    Node *newnode = new Node(x);
+int choice = 1;
 
-    if(front ==0 && rear== 0 ){
-        front = rear =newnode;
-    }
-    else{
-       rear->next = newnode;
-       rear = newnode;
+void enqueue()
+{
+    while (choice)
+    {
+        int x;
+        cout << "Enter the data inside newnode ";
+        cin >> x;
+        Node *newnode = new Node(x);
+
+        if (front == 0 && rear == 0)
+        {
+            front = rear = newnode;
+        }
+        else
+        {
+            rear->next = newnode;
+            rear = newnode;
+        }
+        cout << "Do you want to continue (0,1): ";
+        cin >> choice;
     }
 }
 
-void display(){
-    if(front ==0 && rear== 0 ){
-        cout<<"Queue is empty!";
+void display()
+{
+    if (front == 0 && rear == 0)
+    {
+        cout << "Queue is empty!";
         return;
     }
 
-    else{
+    else
+    {
         Node *temp;
         temp = front;
-        while(temp != 0){
-            cout<<temp->data<<" ";
+        while (temp != 0)
+        {
+            cout << temp->data << " ";
             temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
 }
 
-void dequeue(){
-    if(front ==0 && rear== 0 ){
-        cout<<"Queue is empty!";
+void dequeue()
+{
+    if (front == 0 && rear == 0)
+    {
+        cout << "Queue is empty!";
         return;
     }
-    else{
+    else
+    {
         Node *temp = front;
         front = front->next;
-        delete(temp);
+        delete (temp);
     }
 }
 
-int main(){
-    enqueue(99);
-    enqueue(929);
-    enqueue(993);
+int main()
+{
+    enqueue();
+
     display();
     dequeue();
     display();

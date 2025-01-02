@@ -1,131 +1,163 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class node{
-    public:
+class node
+{
+public:
     int data;
     node *next;
 
-    node(int data){
+    node(int data)
+    {
         this->data = data;
         this->next = 0;
     }
-} *temp,*tail = 0,*head = 0;
+} *tail, *temp, *head = 0;
 
-void createList(int d){
-   node *newnode = new node(d);
+int choice = 1;
 
-   if(tail == 0){
-      
-      head = tail = newnode;
-      
-   }
-   else{
-    
-     tail->next = newnode;
-     tail = tail->next;
-   }
-}
+void createSinglyList()
+{
 
-void display(){
-    
-    if(tail == 0){
-        cout<<"Empty list!!"<<endl;
-    }
-    else{
-        node *temp = head;
+    while (choice)
+    {
+        int d;
+        cout << "Enter data in newnode: ";
+        cin >> d;
+        node *newnode = new node(d);
 
-        while(temp != 0){
-            cout<<temp->data<<" ";
+        if (head == 0)
+        { // because we don't want to loose the reference to first node
+            head = temp = newnode;
+        }
+        else
+        {
+            temp->next = newnode;
             temp = temp->next;
         }
-        
-        cout<<endl;
+        cout << "Do you want to continue (0,1): ";
+        cin >> choice;
     }
 }
 
-void deleteBegin(){
-    if(head == 0){
-        cout<<"List is empty!! "<<endl;
+void display()
+{
+
+    if (head == 0)
+    {
+        cout << "Empty list!!" << endl;
+    }
+    else
+    {
+        node *temp = head;
+
+        while (temp != 0)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+
+        cout << endl;
+    }
+}
+
+void deleteBegin()
+{
+    if (head == 0)
+    {
+        cout << "List is empty!! " << endl;
         return;
     }
-    else{
+    else
+    {
         temp = head;
-         head = head->next;
-        
-        delete(temp);
+        head = head->next;
+
+        delete (temp);
     }
 }
 
-void deleteEnd(){
-    tail = head;
-    while(tail != 0){
-        tail = tail->next;
+void deleteEnd()
+{
+    temp = head;
+    while (temp->next != 0)
+    {
+        tail = temp;
+        temp = temp->next;
     }
-    if(tail == 0){
-       cout<<"List is empty!!"<<endl;
-       return;
+    if (head == 0)
+    {
+        cout << "List is empty!!" << endl;
+        return;
     }
-    else{
-         temp = tail->next;
-        delete(temp);
+    else
+    {
+        tail->next = 0;
+        delete (temp);
     }
 }
 
+void deleteAnyPos(int length)
+{
 
-void deleteAnyPos(int length){
-    node *temp = head;
-    node *nextnode;
+    int pos, i = 1;
+    cout << "Enter the Node position to delete: ";
+    cin >> pos;
+    cout << "Data elements after deletion of node at position " << pos << endl;
 
-    int pos,i=1;
-    cout<<"Enter the Node position to delete: ";
-    cin>>pos;
+    if (pos < 1 || pos > length)
+    {
+        cout << "Invalid position!" << endl;
+        return;
+    }
+    else if (pos == 1)
+    {
 
-    if(pos == 1){
         deleteBegin();
     }
-     else
+    else
     {
-    while(i < pos-1){
-    temp = temp->next;
-    i++;
-    }
-    nextnode = temp->next;
-    temp->next = nextnode->next;
-    delete(nextnode);
+        node *temp = head;
+    node *nextnode;
+        while (i < pos - 1)
+        {
+            temp = temp->next;
+            i++;
+        }
+        nextnode = temp->next;
+        temp->next = nextnode->next;
+        delete(nextnode);
     }
 }
 
-int getLength(){
+int getLength()
+{
     int count = 0;
     temp = head;
-    while(temp != 0){
-        count ++;
+    while (temp != 0)
+    {
+        count++;
         temp = temp->next;
     }
     return count;
 }
 
+int main()
+{
+    createSinglyList();
 
-
-int main(){
-    createList(700);
-    createList(45);
-    createList(51);
-    createList(33);
-    createList(15);
     display();
-     temp = head;
-    cout<<"Data elements after deletion of node"<<endl;
-deleteBegin();
-display();
-deleteEnd();
-display();
+    temp = head;
+    cout << "Data elements after deletion of node at begin" << endl;
+    deleteBegin();
+    display();
+    cout << "Data elements after deletion of node at end" << endl;
+    deleteEnd();
+    display();
 
-int length = getLength(); 
-deleteAnyPos(length);
-display();
-    
+    int length = getLength();
+    deleteAnyPos(length);
+    display();
 
     return 0;
 }

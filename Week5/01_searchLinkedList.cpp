@@ -1,72 +1,90 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class node{
-    public:
+class node
+{
+public:
     int data;
     node *next;
 
-    node(int data){
+    node(int data)
+    {
         this->data = data;
         this->next = 0;
     }
-} *tail = 0,*head = 0;
+}  *head = 0, *temp;
 
-void createList(int d){
-   node *newnode = new node(d);
+int choice = 1;
 
-   if(tail == 0){
-      
-      head = tail = newnode;
-      
-   }
-   else{
-    
-     tail->next = newnode;
-     tail = tail->next;
-   }
-}
+void createSinglyList()
+{
 
-void display(){
-    
-    if(tail == 0){
-        cout<<"Empty list!!"<<endl;
-    }
-    else{
-        node *temp = head;
+    while (choice)
+    {
+        int d;
+        cout << "Enter data in newnode: ";
+        cin >> d;
+        node *newnode = new node(d);
 
-        while(temp != 0){
-            cout<<temp->data<<" ";
+        if (head == 0)
+        { // because we don't want to loose the reference to first node
+            head = temp = newnode;
+        }
+        else
+        {
+            temp->next = newnode;
             temp = temp->next;
         }
-        
-        cout<<endl;
+        cout << "Do you want to continue (0,1): ";
+        cin >> choice;
+    }
+}
+void display()
+{
+
+    if (temp == 0)
+    {
+        cout << "Empty list!!" << endl;
+        return;
+    }
+    else
+    {
+        node *temp = head;
+
+        while (temp != 0)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+
+        cout << endl;
     }
 }
 
-bool searchElement(int d){
-    node *temp = head; 
-    while(temp != 0){
-        if(temp->data == d) return true;
+bool searchElement(int d)
+{
+    node *temp = head;
+    while (temp != 0)
+    {
+        if (temp->data == d)
+            return true;
         temp = temp->next;
     }
     return false;
 }
 
-int main(){
-    createList(700);
-    createList(45);
-    createList(51);
-    createList(33);
-    createList(15);
+int main()
+{
+    createSinglyList();
+
     display();
     int d;
-    cout<<"Enter Data to be searched: ";
-    cin>>d;
+    cout << "Enter Data to be searched: ";
+    cin >> d;
     if (searchElement(d))
-    cout<<"The element is present in the list!";
+        cout << "The element is present in the list!";
     else
-    cout<<"The element is not present in the list!";
+        cout << "The element is not present in the list!";
 
     return 0;
 }

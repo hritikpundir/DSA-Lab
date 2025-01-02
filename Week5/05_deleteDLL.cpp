@@ -8,10 +8,9 @@ class node{
     node * prev;
 
     node(int data){
-        this->data = data;
-        this->next = NULL;
-        this->prev = NULL;
-
+      this->data = data;
+      this->next = NULL;
+      this->prev = NULL;
     }
 };
 
@@ -19,9 +18,13 @@ node *head = 0 , *temp,* tail;
 
 int choice = 1;
 
-void createDoublyList(int data){
-    
-       node *newnode = new node(data);
+void createDoublyList(){
+    while(choice){
+       int d;
+       cout<<"Enter data in newnode: ";
+       cin>>d;
+       node *newnode = new node(d);
+
        if(head == 0){    //because we don't want to loose the reference to first node
           head = temp = newnode;
        }
@@ -30,6 +33,9 @@ void createDoublyList(int data){
         newnode->prev = temp;
         temp = temp->next;
        }
+       cout<<"Do you want to continue (0,1): ";
+       cin>>choice;
+    }
 }
 
 
@@ -55,7 +61,7 @@ void deleteAtBegin(){
     }
 }
 
-void deleteEnd(){
+void deleteAtEnd(){
     temp = head;
     while(temp->next != 0){
         temp = temp->next;
@@ -72,7 +78,7 @@ void deleteEnd(){
 }
 
 
-void deletePos(int length){
+void deleteAtAnyPos(int length){
     int pos,i=1;
     cout<<"Enter the position of the node to be deleted: ";
     cin>>pos;
@@ -110,20 +116,18 @@ int getLength(){
 
 int main(){
     temp = head;
-createDoublyList(5);  
-createDoublyList(51);  
-createDoublyList(52);  
-createDoublyList(55);  
+createDoublyList();  
 cout<<"Data elements before deletion of node"<<endl;
 display();
-cout<<"Data elements after deletion of node"<<endl;
+cout<<"Data elements after deletion of node from begin"<<endl;
 deleteAtBegin();
 display();
-deleteEnd();
+cout<<"Data elements after deletion of node from end"<<endl;
+deleteAtEnd();
 display();
 
 int length = getLength(); 
-deletePos(length);
+deleteAtAnyPos(length);
 display();
     return 0;
 }

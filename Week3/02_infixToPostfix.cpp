@@ -54,9 +54,12 @@ void infixToPostfix(string s){
 
 int main(){
     // string exp = "k+l-m*n+(o^p)*w/u/v*t+q";
-    string exp = "(A-B)*(C^D)/(E+F*G)";
-    cout<<"The infix expression is "<<exp;
+    string exp ;
+    cout<<"Enter the infix expression: ";
+    cin>>exp;
 
     infixToPostfix(exp);
     return 0;
 }
+
+//(A-B)*(C^D)/(E+F*G)
